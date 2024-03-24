@@ -27,7 +27,6 @@ jobs:
 
     - name: Get git sha
       id: get-version
-      working-directory: smith-backend
       run: |
         echo "git_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
