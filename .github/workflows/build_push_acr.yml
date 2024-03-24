@@ -25,6 +25,12 @@ jobs:
         username: langsmith
         password: ${{ secrets.LANGSMITH_ACR_PASSWORD }}
 
+    - name: Get git sha
+      id: get-version
+      working-directory: smith-backend
+      run: |
+        echo "git_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Build Docker Image
       uses: docker/build-push-action@v2
       with:
@@ -32,4 +38,4 @@ jobs:
         file: ./src/Dockerfile
         platforms: linux/amd64
         push: true
-        tags: langsmith.azurecr.io/custom-meters-accelerator:${{inputs.tag}},langsmith.azurecr.io/custom-meters-accelerator:${{inputs.tag}}:latest
+        tags: langsmith.azurecr.io/custom-meters-accelerator:${{steps.get-version.outputs.git_sha}},langsmith.azurecr.io/custom-meters-accelerator:latest
