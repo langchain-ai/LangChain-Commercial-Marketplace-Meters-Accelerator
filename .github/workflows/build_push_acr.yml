@@ -23,7 +23,7 @@ jobs:
       with:
         registry: langsmith.azurecr.io
         username: langsmith
-        password: ${{ secrets.ACR_PASSWORD }}
+        password: ${{ secrets.LANGSMITH_ACR_PASSWORD }}
 
     - name: Build Docker Image
       uses: docker/build-push-action@v2
